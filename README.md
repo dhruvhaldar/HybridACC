@@ -55,17 +55,27 @@ This project demonstrates key concepts from EL2450:
 
 ## Running the Simulation
 
-1.  **Install Dependencies**:
+1.  **Create and Activate Virtual Environment**:
+    
+    *   Create the environment:
+        ```bash
+        python -m venv venv
+        ```
+    *   Activate the environment:
+        *   Windows: `.\venv\Scripts\activate`
+        *   macOS/Linux: `source venv/bin/activate`
+
+2.  **Install Dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
 
-2.  **Run Simulation**:
+3.  **Run Simulation**:
     ```bash
     python main.py
     ```
 
-3.  **Run Tests**:
+4.  **Run Tests**:
     ```bash
     python -m unittest discover tests
     ```
@@ -73,12 +83,30 @@ This project demonstrates key concepts from EL2450:
 ## Results
 
 ### Static Plots
-The following plot shows the velocity profile, inter-vehicle distance, and controller state transitions over time.
+The following plots analyze the system's behavior over the simulation duration:
+
+1.  **Velocity vs Time**:
+    -   **Blue Line**: Velocity of the Ego vehicle.
+    -   **Orange Dashed Line**: Velocity of the Lead vehicle.
+    -   Shows how the Ego vehicle adjusts its speed to match the Lead vehicle or maintain its set cruise speed.
+
+2.  **Distance vs Time**:
+    -   **Green Line**: Distance between the two vehicles.
+    -   **Red 'x' Markers**: Indicate safety violations where the distance fell below the safe threshold.
+
+3.  **Controller State vs Time**:
+    -   **Purple Step Line**: The active state of the Hybrid Automaton (`CRUISE`, `FOLLOW`, `EMERGENCY_BRAKE`).
+    -   Demonstrates the discrete switching logic in response to changing distance and velocity conditions.
 
 ![Simulation Results](simulation_results.png)
 
 ### Animation
-An animation of the vehicles is also generated: [simulation.gif](simulation.gif)
+An animation of the vehicles is also generated to visualize the spatial dynamics:
+-   **Blue Dot**: Ego Vehicle.
+-   **Red Dot**: Lead Vehicle.
+-   The view pans to keep both vehicles centered as they travel.
+
+![Simulation Animation](simulation.gif)
 
 ## Source Code
 
@@ -87,3 +115,7 @@ An animation of the vehicles is also generated: [simulation.gif](simulation.gif)
 -   [vehicle.py](vehicle.py): Vehicle physics model.
 -   [safety_monitor.py](safety_monitor.py): Safety invariant checker.
 -   [visualization.py](visualization.py): Plotting and animation functions.
+
+## License
+
+MIT License
